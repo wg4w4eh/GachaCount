@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抽數計算器</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            font-size: 20px;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input {
+            width: 100px;
+            text-align: right;
+            font-size: 20px;
+            padding: 5px;
+            outline: none;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            -webkit-tap-highlight-color: transparent;
+            -moz-appearance: textfield; /* Hide spinner in Firefox */
+        }
+        input::-webkit-outer-spin-button, 
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        button {
+            margin-top: 10px;
+            font-size: 22px;
+            padding: 10px 20px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            background:red;
+            color: white;
+            border-radius: 5px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        button:focus, input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        .coin-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        .coin-container img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            user-select: none;
+            pointer-events: none;
+        }
+        .coin-container label {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>抽數計算器</h2>
+        <div class="coin-container">
+            <img src="originium.png" alt="源石">
+            <label>至純源石: <input type="number" id="Originiums" value="0" oninput="validateInput(this)"></label>
+        </div>
+        <div class="coin-container">
+            <img src="synthetic-jade.png" alt="合成玉">
+            <label>合成玉: <input type="number" id="SyntheticJade" value="0" oninput="validateInput(this)"></label>
+        </div>
+        <div class="coin-container">
+            <img src="one-pull.png" alt="單抽券">
+            <label>尋訪憑證: <input type="number" id="OnePull" value="0" oninput="validateInput(this)"></label>
+        </div>
+        <div class="coin-container">
+            <img src="ten-pull.png" alt="十抽券">
+            <label>十連尋訪憑證: <input type="number" id="TenPull" value="0" oninput="validateInput(this)"></label>
+        </div>
+        <button onclick="calculateTotal()">計算抽數</button>
+        <h3>總抽數: <span id="total">0</span>抽</h3>
+    </div>
+    
+    <script>
+        function validateInput(input) {
+            input.value = input.value.replace(/[^0-9]/g, ''); // Only allow numbers
+        }
+
+        function calculateTotal() {
+            let Originiums = parseInt(document.getElementById('Originiums').value) || 0;
+            let SyntheticJade = parseInt(document.getElementById('SyntheticJade').value) || 0;
+            let OnePull = parseInt(document.getElementById('OnePull').value) || 0;
+            let TenPull = parseInt(document.getElementById('TenPull').value) || 0;
+            
+            let total = Math.floor(Originiums * 180 / 600) + Math.floor(SyntheticJade / 600) + (OnePull * 1) + (TenPull * 10);
+            document.getElementById('total').textContent = total;
+        }
+    </script>
+</body>
+</html>
