@@ -118,7 +118,7 @@
             let OnePull = parseInt(document.getElementById('OnePull').value) || 0;
             let TenPull = parseInt(document.getElementById('TenPull').value) || 0;
             
-            let total = Math.floor(Originiums * 180 / 600) + Math.floor(SyntheticJade / 600) + (OnePull * 1) + (TenPull * 10);
+            let total = Math.floor((Originiums * 180 + SyntheticJade) / 600) + (OnePull * 1) + (TenPull * 10);
             document.getElementById('total').textContent = total;
         }
     </script>
